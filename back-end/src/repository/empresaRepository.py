@@ -24,7 +24,6 @@ async def findEmpresas():
                 empresa.setId(e['id'])
                 empresa.setNome(e['nome'])
                 empresa.setClassificacaoSetorial(e['classificao_setorial'])
-                empresa.setEstado(e['estado'])
                 empresa.setRamo(e['ramo'])
                 empresa.setClassificacao(e['classificacao'])
                 empresas.append(empresa)
@@ -51,7 +50,6 @@ async def findBySimbolo(simbolo: str):
                 empresa.setId(e['id'])
                 empresa.setNome(e['nome'])
                 empresa.setClassificacaoSetorial(e['classificao_setorial'])
-                empresa.setEstado(e['estado'])
                 empresa.setRamo(e['ramo'])
                 empresa.setClassificacao(e['classificacao'])
 

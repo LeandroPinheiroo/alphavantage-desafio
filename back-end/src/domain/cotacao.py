@@ -3,7 +3,6 @@ import datetime
 class Cotacao:
 
     def __init__(self, id: int = None, preco: float = None , volume: int = None , data: datetime = None , porcentagemVariacao: float = None, variacao: float = None , idEmpresa: int = None):
-        print(preco)
         self.__id = id
         self.__preco = preco
         self.__volume = volume

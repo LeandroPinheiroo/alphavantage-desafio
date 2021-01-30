@@ -62,7 +62,7 @@ export const Empresa = () => {
         <>
             <Toast ref={toast} />
             <div className="card">
-                <h1>Top 10 Empresas</h1>
+                <h1>As 10 ações do Ibovespa que mais subiram em 2020</h1>
                 <div className="p-grid p-fluid p-dir-row">
                     {
                     empresas.map((emp) => {

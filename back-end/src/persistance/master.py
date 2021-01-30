@@ -41,7 +41,6 @@ async def tabelaEmpresa(conexao : Connection):
                     id SERIAL PRIMARY KEY NOT NULL UNIQUE,
                     nome character varying(150) NOT NULL,
                     classificao_setorial character varying(10) NOT NULL,
-                    estado character varying(150),
                     ramo character varying(70),
                     classificacao int
                 )
@@ -82,14 +81,14 @@ async def insertEmpresas(conexao : Connection):
         
         await conexao.copy_records_to_table(
             "empresa", records = [
-                (1, "Oi", "OIBR-C", "Rio de Janeiro, Rio de Janeiro", "Telecomunicações", 10),
-                (2, "Braskem", "BRKM5.SAO", "São Paulo, São Paulo", "Petroquímica", 9),
-                (3, "Itaúsa", "ITSA4.SAO", "Brasil", "Finanças e indústria", 8),
-                (4, "JBS", "JBSS3.SAO", "São Paulo, São Paulo", "Alimentício", 7),
-                (5, "Eletrobras", "ELET6.SAO", "Rio de Janeiro, Rio de Janeiro", "Energia elétrica", 6),
-                (6, "Banco do Brasil", "BBAS3.SAO", "Brasília, Distrito Federal", "Bancário", 5),
-                (7, "Vale", "VALE3.SAO", "Rio de Janeiro, Rio de Janeiro", "Mineração", 4),
-                (8, "Banco Bradesco", "BBDC4.SAO", "Osasco, São Paulo", "Bancário", 3),
-                (9, "Itaú Unibanco", "ITUB4.SAO", "São Paulo, São Paulo", "Bancário", 2),
-                (10, "Petrobras", "PETR4.SAO", "Rio de Janeiro, Rio de Janeiro", "Petróleo e gás", 1)
+                (1, "SID NACIONAL", "CSNA3.SA", "Siderúrgica", 10),
+                (2, "WEG", "WEGE3.SA", "Eletrônicos", 9),
+                (3, "PETRORIO", "PRIO3.SA", "Petróleoa", 8),
+                (4, "MAGAZINE LUIZA", "MGLU3.SA", "Varejo", 7),
+                (5, "BRADESPAR", "BRAP4.SA", "Financeiro e Outros", 6),
+                (6, "VALE", "VALE3.SA", "Mineração", 5),
+                (7, "USIMINAS", "USIM5.SA", "Mineração, Siderúrgica", 4),
+                (8, "B3", "B3SA3.SA", "Financeiro", 3),
+                (9, "SUZANO PAPEL", "SUZB3.SA", "Papel; ‎Celulose", 2),
+                (10, "LOCALIZA", "RENT3.SA", "Automóveis", 1)
         ])

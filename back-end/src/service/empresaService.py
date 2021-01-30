@@ -26,10 +26,14 @@ async def buscaCotacao(simbolo: str):
     parameters = "function=" + globalQuote
     parameters += "&symbol=" + simbolo
     parameters += "&apikey=" + chave
-    response = requests.get('https://www.alphavantage.co/query?' + parameters)
-    jsonResponse : dict = response.json() #em python, ao desserializar o json do response o objeto é do tipo dict
-    cotacao = CotacaoMapper.toCotacao(jsonResponse["Global Quote"])
-    cotacao.setIdEmpresa(empresa.getId())
-    await cotacaoRepository.insert(cotacao)
-    empresa.setCotacao(cotacao)
-    return empresa
+    try:
+        response = requests.get('https://www.alphavantage.co/query?' + parameters)
+        jsonResponse : dict = response.json() #em python, ao desserializar o json do response o objeto é do tipo dict
+        cotacao = CotacaoMapper.toCotacao(jsonResponse["Global Quote"])
+        cotacao.setIdEmpresa(empresa.getId())
+        await cotacaoRepository.insert(cotacao)
+        empresa.setCotacao(cotacao)
+        return empresa
+    except:
+        return None
+    

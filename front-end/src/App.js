@@ -23,6 +23,7 @@ import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/timegrid/main.css';
 import './layout/layout.scss';
 import './App.scss';
+import { Empresa } from './components/Empresa';
 
 const App = () => {
 
@@ -35,7 +36,7 @@ const App = () => {
         {
             label: 'Cotação', icon: 'pi pi-fw pi-chart-bar',
             items: [
-                { label: 'Empresas', icon: 'pi pi-fw pi-id-card', to: '/cotacao-empresas' },
+                { label: 'Empresas', icon: 'pi pi-fw pi-id-card', to: '/empresa' },
             ]
         },
         
@@ -81,6 +82,7 @@ const App = () => {
 
             <div className="layout-main">
                 <Route path="/" exact component={Dashboard} />
+                <Route path="/empresa" exact component={Empresa} />
             </div>
 
             <AppFooter />

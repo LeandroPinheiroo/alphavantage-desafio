@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-export class CountryService {
+export class EmpresaService {
 
-    getCountries() {
-        return axios.get('assets/demo/data/countries.json')
-            .then(res => res.data.data);
+    getEmpresas() {
+        return axios.get('http://127.0.0.1:8000/empresa/')
+        .then(res => res.data);
     }
 }

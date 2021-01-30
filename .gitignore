@@ -127,3 +127,33 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+./front-end/sass-cache
+./front-end/vscode
+
+# dependencies
+./front-end/node_modules
+./front-end/package-lock.json
+
+
+# production
+./front-end/build
+./front-end/idea
+./front-end/.idea
+
+# misc
+./front-end/.DS_Store
+./front-end/.env.local
+./front-end/.env.development.local
+./front-end/.env.test.local
+./front-end/.env.production.local
+
+./front-end/npm-debug.log*
+./front-end/yarn-debug.log*
+./front-end/yarn-error.log*
+
+./front-end/layout.css
+./front-end/pages.css

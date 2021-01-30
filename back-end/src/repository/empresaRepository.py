@@ -11,7 +11,7 @@ async def findEmpresas():
         conexao = await conexaoDB.getConexao()
         query = list(await conexao.fetch(
             '''
-                select e from empresa e;
+                select e from empresa e order by e.classificacao;
             '''
         ))
         empresas: list = []
@@ -27,20 +27,6 @@ async def findEmpresas():
                 empresa.setEstado(e['estado'])
                 empresa.setRamo(e['ramo'])
                 empresa.setClassificacao(e['classificacao'])
-                #cotacao
-                # c = dict(item['c'])
-                # if(c is not None):
-                #     cotacao : Cotacao = Cotacao()
-                #     cotacao.setId(c["id"])
-                #     cotacao.setPreco(c["preco"])
-                #     cotacao.setVolume(c["volume"])
-                #     cotacao.setData(c["data"])
-                #     cotacao.setPorcentagemVariacao(c["porcentagem_variacao"])
-                #     cotacao.setVariacao(c["variacao"])
-                #     cotacao.setIdEmpresa(c['id_empresa'])
-                #     #seta a cotacao
-                #     empresa.setCotacao(cotacao)
-                # print(empresa)
                 empresas.append(empresa)
         await conexao.close()
         print("AAAA")

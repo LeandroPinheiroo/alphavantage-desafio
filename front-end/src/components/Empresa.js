@@ -50,6 +50,7 @@ export const Empresa = () => {
                 setVolume(data.empresa.cotacao.volume);
                 setVariacao(data.empresa.cotacao.variacao);
                 setPorcentagemVariacao(data.empresa.cotacao.porcentagemVariacao);
+                setClassificacao(data.empresa.classificacao);
             }else{
                 toast.current.show({ severity: 'error', summary: 'Falha ao buscar cotação: '+simbolo,life: 3000 });
             }
@@ -65,8 +66,8 @@ export const Empresa = () => {
                     {
                     empresas.map((emp) => {
                         return (
-                            <div className="p-field p-col-2" key = {emp.id}>
-                                    <Button key = {emp.id} label={emp.classificao_setorial} value={emp.classificao_setorial} className="p-mr-2 p-mb-2" onClick={() => onEmpresaSelect(emp.classificao_setorial)}></Button>
+                            <div className="p-field p-col-12 p-md-2" key = {emp.id}>
+                                    <Button key = {emp.id} label={emp.classificacao +" - "+ emp.classificao_setorial} value={emp.classificao_setorial} className="p-mr-2 p-mb-2" onClick={() => onEmpresaSelect(emp.classificao_setorial)}></Button>
                             </div>
                         );
                     })}
@@ -75,36 +76,36 @@ export const Empresa = () => {
                 
             </div>
         
-            { empresa !== null &&<div className="card">
-                <h1>Empresa Selecionada: {nome}</h1>
+            { nome !== "" &&<div className="card">
+                <h1>Empresa Selecionada: {nome}, Classificação: {classificacao}</h1>
                 <div className="p-grid p-fluid p-dir-row">
-                    <div className="p-field p-col-3">
+                    <div className="p-field p-col-12 p-md-3">
                             <label htmlFor="firstname1">Empresa</label>
                             <InputText id="firstname1" type="text"  value={nome} readOnly={true}/>
                     </div>
-                    <div className="p-field p-col-3">
+                    <div className="p-field p-col-12 p-md-3">
                             <label htmlFor="firstname1">Símbolo Bolsa</label>
                             <InputText id="firstname1" type="text"  value={classificao_setorial} readOnly={true}/>
                     </div>
-                    <div className="p-field p-col-6">
+                    <div className="p-field p-col-12 p-md-6 ">
                             <label htmlFor="lastname1">Ramo</label>
                             <InputText id="lastname1" type="text"  value={ramo} readOnly={true}/>
                     </div>
                 </div>
                 <div className="p-grid p-fluid p-dir-row">
-                    <div className="p-field p-col-3">
+                    <div className="p-field p-col-12 p-md-3">
                             <label htmlFor="firstname1">Preço</label>
                             <InputText id="firstname1" type="text"  value={preco} readOnly={true}/>
                     </div>
-                    <div className="p-field p-col-3">
+                    <div className="p-field p-col-12 p-md-3">
                             <label htmlFor="firstname1">Volume</label>
                             <InputText id="firstname1" type="text" value={volume} readOnly={true}/>
                     </div>
-                    <div className="p-field p-col-3">
+                    <div className="p-field p-col-12 p-md-3">
                             <label htmlFor="lastname1">Variação</label>
                             <InputText id="lastname1" type="text" value={variacao} readOnly={true}/>
                     </div>
-                    <div className="p-field p-col-3">
+                    <div className="p-field p-col-12 p-md-3">
                             <label htmlFor="lastname1">Porcentagem Variação</label>
                             <InputText id="lastname1" type="text" value={porcentagemVariacao} readOnly={true}/>
                     </div>

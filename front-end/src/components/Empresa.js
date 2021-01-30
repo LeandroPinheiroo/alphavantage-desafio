@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Toast } from 'primereact/toast';
 
 import {EmpresaService} from '../service/EmpresaService'
-import { Dropdown } from 'primereact/dropdown';
 import {InputText} from 'primereact/inputtext';
 import { Button } from 'primereact/button';
+
+import "./style.css"
 
 export const Empresa = () => {
 
@@ -67,7 +68,7 @@ export const Empresa = () => {
                     empresas.map((emp) => {
                         return (
                             <div className="p-field p-col-12 p-md-2" key = {emp.id}>
-                                    <Button key = {emp.id} label={emp.classificao_setorial} value={emp.classificao_setorial} className="p-mr-2 p-mb-2" onClick={() => onEmpresaSelect(emp.classificao_setorial)}></Button>
+                                    <Button key = {emp.id} label={emp.classificao_setorial} value={emp.classificao_setorial} className="p-mr-2 p-mb-2 btn" onClick={() => onEmpresaSelect(emp.classificao_setorial)}></Button>
                             </div>
                         );
                     })}

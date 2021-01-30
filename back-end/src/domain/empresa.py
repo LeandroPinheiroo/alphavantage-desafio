@@ -1,12 +1,15 @@
+from src.domain.cotacao import Cotacao
+
 class Empresa:
 
-    def __init__(self, id: int = None, nome: str = None, classificao_setorial: str = None, estado: str = None, ramo: str = None, classificacao: int = None):
+    def __init__(self, id: int = None, nome: str = None, classificao_setorial: str = None, estado: str = None, ramo: str = None, classificacao: int = None, cotacao:Cotacao = None):
         self.__id = id
         self.__nome = nome
         self.__classificao_setorial = classificao_setorial
         self.__estado = estado
         self.__ramo = ramo
         self.__classificacao = classificacao
+        self.__cotacao = cotacao
 
        
     def getId(self):
@@ -39,24 +42,27 @@ class Empresa:
     def setRamo(self, ramo : str):
         self.__ramo = ramo
 
-    def getRamo(self):
-        return self.__ramo
-
-    def setRamo(self, ramo : str):
-        self.__ramo = ramo
 
     def getClassificacao(self):
         return self.__classificacao
 
     def setClassificacao(self, classificacao : int):
         self.__classificacao = classificacao
+
+    def getCotacao(self):
+        return self.__cotacao
+
+    def setCotacao(self, cotacao : Cotacao):
+        self.__cotacao = cotacao
     
     def toString(self):
-        return {
-            "id": self.__id,
-            "nome": self.__nome,
-            "classificao_setorial": self.__classificao_setorial,
-            "estado": self.__estado,
-            "ramo": self.__ramo,
-            "classificacao": self.__classificacao,
+        data = {
+            "id": self.getId(),
+            "nome": self.getNome(),
+            "classificao_setorial": self.getClassificacaoSetorial(),
+            "estado": self.getEstado(),
+            "ramo": self.getRamo(),
+            "classificacao": self.getClassificacao(),
+            "cotacao":self.__cotacao.toString()
         }
+        return data

@@ -1,21 +1,22 @@
 import datetime
 
-class Empresa:
+class Cotacao:
 
-    def __init__(self, id: int = None, preco: float = None , volume: int = None , data: datetime = None , porcentagemVariacao: float = None, variacao: float = None , id_empresa: int = None):
+    def __init__(self, id: int = None, preco: float = None , volume: int = None , data: datetime = None , porcentagemVariacao: float = None, variacao: float = None , idEmpresa: int = None):
+        print(preco)
         self.__id = id
         self.__preco = preco
         self.__volume = volume
         self.__data = data
         self.__porcentagemVariacao = porcentagemVariacao
         self.__variacao = variacao
-        self.__id_empresa = id_empresa
+        self.__idEmpresa = idEmpresa
 
        
     def getId(self):
         return self.__id
 
-    def setId(self, id : str):
+    def setId(self, id : int):
         self.__id = id
 
     def getPreco(self):
@@ -42,11 +43,11 @@ class Empresa:
     def setPorcentagemVariacao(self, porcentagemVariacao : float):
         self.__porcentagemVariacao = porcentagemVariacao
 
-    def getVaiacao(self):
-        return self.__vairacao
+    def getVariacao(self):
+        return self.__variacao
 
-    def setVaiacao(self, vairacao : float):
-        self.__vairacao = vairacao
+    def setVariacao(self, variacao : float):
+        self.__variacao = variacao
 
     def getIdEmpresa(self):
         return self.__idEmpresa
@@ -59,8 +60,8 @@ class Empresa:
             "id": self.__id,
             "preco": self.__preco,
             "volume": self.__volume,
-            "data": self.__data,
+            "data": str(self.__data),
             "porcentagemVariacao": self.__porcentagemVariacao,
             "variacao": self.__variacao,
-            "id_empresa": self.__id_empresa
+            "id_empresa": self.__idEmpresa
         }

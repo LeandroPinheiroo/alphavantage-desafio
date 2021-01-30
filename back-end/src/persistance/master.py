@@ -26,7 +26,7 @@ async def tabelaUsuario(conexao : Connection):
         await conexao.execute(
             '''
                 CREATE TABLE IF NOT EXISTS usuario(
-                    id bigint PRIMARY KEY NOT NULL UNIQUE,
+                    id SERIAL PRIMARY KEY NOT NULL UNIQUE,
                     email character varying(150) NOT NULL,
                     senha character varying(255) NOT NULL
                 )
@@ -38,7 +38,7 @@ async def tabelaEmpresa(conexao : Connection):
         await conexao.execute(
             '''
                 CREATE TABLE IF NOT EXISTS empresa(
-                    id bigint PRIMARY KEY NOT NULL UNIQUE,
+                    id SERIAL PRIMARY KEY NOT NULL UNIQUE,
                     nome character varying(150) NOT NULL,
                     classificao_setorial character varying(10) NOT NULL,
                     estado character varying(150),

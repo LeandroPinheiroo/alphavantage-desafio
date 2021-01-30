@@ -11,7 +11,7 @@ async def findEmpresas():
         conexao = await conexaoDB.getConexao()
         query = list(await conexao.fetch(
             '''
-                select e,c from empresa e inner join cotacao c on e.id = c.id_empresa;
+                select e from empresa e;
             '''
         ))
         empresas: list = []
@@ -28,22 +28,22 @@ async def findEmpresas():
                 empresa.setRamo(e['ramo'])
                 empresa.setClassificacao(e['classificacao'])
                 #cotacao
-                c = dict(item['c'])
-                print(c)
-                if(c is not None):
-                    cotacao : Cotacao = Cotacao()
-                    cotacao.setId(c["id"])
-                    cotacao.setPreco(c["preco"])
-                    cotacao.setVolume(c["volume"])
-                    cotacao.setData(c["data"])
-                    cotacao.setPorcentagemVariacao(c["porcentagem_variacao"])
-                    cotacao.setVariacao(c["variacao"])
-                    cotacao.setIdEmpresa(c['id_empresa'])
-                    #seta a cotacao
-                    empresa.setCotacao(cotacao)
-                print(empresa)
+                # c = dict(item['c'])
+                # if(c is not None):
+                #     cotacao : Cotacao = Cotacao()
+                #     cotacao.setId(c["id"])
+                #     cotacao.setPreco(c["preco"])
+                #     cotacao.setVolume(c["volume"])
+                #     cotacao.setData(c["data"])
+                #     cotacao.setPorcentagemVariacao(c["porcentagem_variacao"])
+                #     cotacao.setVariacao(c["variacao"])
+                #     cotacao.setIdEmpresa(c['id_empresa'])
+                #     #seta a cotacao
+                #     empresa.setCotacao(cotacao)
+                # print(empresa)
                 empresas.append(empresa)
         await conexao.close()
+        print("AAAA")
         return empresas
     except:
         print("Erro ao buscar empresas", str(exceptMsg))

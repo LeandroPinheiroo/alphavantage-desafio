@@ -56,13 +56,21 @@ class Empresa:
         self.__cotacao = cotacao
     
     def toString(self):
-        data = {
-            "id": self.getId(),
-            "nome": self.getNome(),
-            "classificao_setorial": self.getClassificacaoSetorial(),
-            "estado": self.getEstado(),
-            "ramo": self.getRamo(),
-            "classificacao": self.getClassificacao(),
-            "cotacao":self.__cotacao.toString()
-        }
-        return data
+        if(self.__cotacao is not None):
+            return {
+                "id": self.getId(),
+                "nome": self.getNome(),
+                "classificao_setorial": self.getClassificacaoSetorial(),
+                "estado": self.getEstado(),
+                "ramo": self.getRamo(),
+                "classificacao": self.getClassificacao(),
+                "cotacao":self.__cotacao.toString()
+            }
+        return {
+                "id": self.getId(),
+                "nome": self.getNome(),
+                "classificao_setorial": self.getClassificacaoSetorial(),
+                "estado": self.getEstado(),
+                "ramo": self.getRamo(),
+                "classificacao": self.getClassificacao()
+            }

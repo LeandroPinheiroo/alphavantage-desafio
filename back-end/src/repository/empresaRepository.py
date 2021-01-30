@@ -29,7 +29,6 @@ async def findEmpresas():
                 empresa.setClassificacao(e['classificacao'])
                 empresas.append(empresa)
         await conexao.close()
-        print("AAAA")
         return empresas
     except:
         print("Erro ao buscar empresas", str(exceptMsg))

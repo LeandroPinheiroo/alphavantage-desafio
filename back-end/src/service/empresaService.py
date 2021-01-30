@@ -1,10 +1,11 @@
 import asyncio
 import asyncpg
-from src.repository import empresaRepository
-from src.service.mapper.cotacaoMapper import CotacaoMapper
 from sanic.response import json
-from src.util import dbUtil
 import requests
+from src.repository import empresaRepository
+from src.repository import cotacaoRepository
+from src.service.mapper.cotacaoMapper import CotacaoMapper
+from src.util import dbUtil
 
 async def buscaEmpresas():
     empresas = await empresaRepository.findEmpresas()
@@ -29,5 +30,6 @@ async def buscaCotacao(simbolo: str):
     jsonResponse : dict = response.json() #em python, ao desserializar o json do response o objeto é do tipo dict
     cotacao = CotacaoMapper.toCotacao(jsonResponse["Global Quote"])
     cotacao.setIdEmpresa(empresa.getId())
+    await cotacaoRepository.insert(cotacao)
     empresa.setCotacao(cotacao)
     return empresa

@@ -53,11 +53,11 @@ async def tabelaCotacao(conexao : Connection):
         await conexao.execute(
             '''
                 CREATE TABLE IF NOT EXISTS cotacao(
-                    id bigint PRIMARY KEY NOT NULL UNIQUE,
+                    id SERIAL PRIMARY KEY NOT NULL UNIQUE,
                     preco float(4),
                     volume bigint,
                     data timestamp without time zone,
-                    porcentagem_variacao float(5),
+                    porcentagem_variacao character varying(10),
                     variacao float(3),
                     id_empresa bigint NOT NULL,
                     CONSTRAINT cotacao_fk FOREIGN KEY(id_empresa) REFERENCES empresa(id) ON DELETE CASCADE

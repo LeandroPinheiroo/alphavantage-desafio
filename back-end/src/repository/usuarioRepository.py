@@ -9,28 +9,33 @@ async def insert(usuario : Usuario):
     
     async with conexao.transaction():
         await conexao.execute('''
-            INSERT INTO usuario VALUES($1, $2)
+            INSERT INTO usuario (nome,email,senha) VALUES($1, $2, $3)
             ''',
-            usuario.getNome,
-            usuario.getSenha
+            usuario.getNome(),
+            usuario.getEmail(),
+            usuario.getSenha()
         )
     await conexao.close()
 
-async def findByNomeSenha(nome: str, senha: str):
+async def findByEmail(email: str):
     conexao = await conexaoDB.getConexao()
     
     query = await conexao.fetch(
         '''
-            select u from usuario u where u.nome = $1 and u.senha = $2;
+            select u from usuario u where u.email = $1;
         ''',
-        nome,
-        senha
+        email
     )
-    usuario = Usuario()
-    query = dict(query)
-    if query is not None:
-        usuario.setId = query['id']
-        usuario.setNome = query['nome']
-        usuario.setSenha = query['senha']
+    usuario: Usuario = Usuario()
+    
+    if len(query) > 0:
+        query = dict(query[0])
+        u = dict(query['u'])
+        usuario.setId(u['id'])
+        usuario.setEmail(u['email'])
+        usuario.setNome(u['nome'])
+        usuario.setSenha(u['senha'])
+
+    return usuario
 
     await conexao.close()

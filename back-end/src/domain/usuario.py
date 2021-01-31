@@ -1,7 +1,8 @@
 class Usuario:
-    def __init__(self, id: int = None, nome: str = None, senha: str = None):
+    def __init__(self, id: int = None, nome: str = None, senha: str = None,email: str = None):
         self.__id = id
         self.__nome = nome
+        self.__email = email
         self.__senha = senha
        
     def getId(self):
@@ -21,10 +22,17 @@ class Usuario:
 
     def setSenha(self, senha : str):
         self.__senha = senha
+
+    def getEmail(self):
+        return self.__email
+
+    def setEmail(self, email : str):
+        self.__email = email
     
     def toString(self):
         return {
             "id"  : self.__id,
             "nome"  : self.__nome,
+            "email"  : self.__email,
             "senha"   : self.__senha,
         }

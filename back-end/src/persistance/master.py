@@ -28,7 +28,8 @@ async def tabelaUsuario(conexao : Connection):
                 CREATE TABLE IF NOT EXISTS usuario(
                     id SERIAL PRIMARY KEY NOT NULL UNIQUE,
                     email character varying(150) NOT NULL,
-                    senha character varying(255) NOT NULL
+                    senha character varying(255) NOT NULL,
+                    nome character varying(150) NOT NULL
                 )
             '''
         )

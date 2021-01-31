@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import classNames from 'classnames';
 import { Route } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
+import {useSelector} from 'react-redux';
 
 import { AppTopbar } from './AppTopbar';
 import { AppFooter } from './AppFooter';
@@ -9,6 +10,7 @@ import { AppMenu } from './AppMenu';
 import { AppProfile } from './AppProfile';
 
 import { Dashboard } from './components/Dashboard';
+import { Login } from './pages/Login/Login'
 
 
 
@@ -24,6 +26,7 @@ import '@fullcalendar/timegrid/main.css';
 import './layout/layout.scss';
 import './App.scss';
 import { Empresa } from './components/Empresa';
+import { Registrar } from './pages/usuario-novo';
 
 const App = () => {
 
@@ -66,28 +69,40 @@ const App = () => {
     });
 
     return (
-        <div className={wrapperClass}>
-            <AppTopbar />
+        <>
+            {
+                useSelector(state => state.user.usuarioLogado) === 1 &&
+                <div className={wrapperClass}>
+                    <AppTopbar />
 
-            <CSSTransition classNames="layout-sidebar" timeout={{ enter: 200, exit: 200 }} in={isSidebarVisible()} unmountOnExit>
-                <div ref={sidebar} className={sidebarClassName} >
-                    <div className="layout-logo">
-                        <img alt="Logo" src={logo} width='100'/>
+                    <CSSTransition classNames="layout-sidebar" timeout={{ enter: 200, exit: 200 }} in={isSidebarVisible()} unmountOnExit>
+                        <div ref={sidebar} className={sidebarClassName} >
+                            <div className="layout-logo">
+                                <img alt="Logo" src={logo} width='100'/>
+                            </div>
+                            <AppProfile />
+                            <AppMenu model={menu} />
+                        </div>
+                    </CSSTransition>
+
+
+                    <div className="layout-main">
+                        <Route path="/" exact component={Dashboard} />
+                        <Route path="/empresa" exact component={Empresa} />
                     </div>
-                    <AppProfile />
-                    <AppMenu model={menu} />
+
+                    <AppFooter />
+
                 </div>
-            </CSSTransition>
-
-
-            <div className="layout-main">
-                <Route path="/" exact component={Dashboard} />
-                <Route path="/empresa" exact component={Empresa} />
-            </div>
-
-            <AppFooter />
-
-        </div>
+            }
+            {
+                useSelector(state => state.user.usuarioLogado) === 0 &&
+                <>
+                    <Route path="/login" exact component={Login} />
+                    <Route path="/registrar" exact component={Registrar} />
+                </>
+            }
+        </>
     );
 
 }

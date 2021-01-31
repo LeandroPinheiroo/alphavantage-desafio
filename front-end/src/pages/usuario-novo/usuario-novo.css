@@ -1,0 +1,24 @@
+
+.cadastro-content{
+    width: 100%;
+    height: 100vh;
+    padding: 15%;
+    margin: auto;
+    background-color: #393e46;
+}
+
+.btn-cadastro{
+    width: 100%;
+    background-color: #f9f871 !important;
+    color: #393e46 !important;
+}
+
+.opcoes-cadastro a{
+    text-decoration: none;
+    color: #FFF;
+    transition: .3s ease-in-out;
+}
+
+.opcoes-cadastro a:hover{
+    color: #f9f871;
+}

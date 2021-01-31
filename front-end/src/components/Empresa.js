@@ -53,7 +53,7 @@ export const Empresa = () => {
                 setPorcentagemVariacao(data.empresa.cotacao.porcentagemVariacao);
                 setClassificacao(data.empresa.classificacao);
             }else{
-                toast.current.show({ severity: 'error', summary: 'Falha ao buscar cotação: '+simbolo,life: 3000 });
+                toast.current.show({ severity: 'error', summary: 'Falha ao buscar cotação: '+empresa,life: 3000 });
             }
         });
     };

@@ -10,6 +10,6 @@ export class EmpresaService {
     getCotacao(sigla) {
         return axios.get('http://127.0.0.1:8000/empresa/'+sigla+'/cotacao')
         .then(res => res.data)
-        .catch(res => "erro");
+        .catch(() => "erro");
     }
 }

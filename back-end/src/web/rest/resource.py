@@ -7,6 +7,7 @@ import aiohttp
 import requests
 from marshmallow import Schema, fields, ValidationError, EXCLUDE
 
+from src.domain.intraday import Intraday
 from src.domain.usuario import Usuario
 from src.service import usuarioService
 from src.service.mapper.usuarioMapper import UsuarioMapper
@@ -33,6 +34,22 @@ async def buscaEmpresas(request):
         return json(
                 {"erro" : str(exceptMsg)}, 
                 status = 400,
+        )
+
+@app.route("/empresa/<simbolo>/intraday", methods=["GET"])
+async def buscaCotacao(request, simbolo : str):
+    try :
+        intradayList: list = await empresaService.buscaIntraDay(simbolo)
+        if(intradayList is None):
+            return json({"erros": "Simbolo inválido "+simbolo},status=400)
+        return json(
+            {"intraday" : [intraday.toString() for intraday in intradayList]},
+            status = 200
+        )
+    except Exception as exceptMsg:
+        return json(
+            {"erros": str(exceptMsg)},
+            status=400
         )
 
 @app.route("/empresa/<simbolo>/cotacao", methods=["GET"])

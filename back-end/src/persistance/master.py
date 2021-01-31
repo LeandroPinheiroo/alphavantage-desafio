@@ -82,14 +82,14 @@ async def insertEmpresas(conexao : Connection):
         
         await conexao.copy_records_to_table(
             "empresa", records = [
-                (1, "SID NACIONAL", "CSNA3.SA", "Siderúrgica", 10),
-                (2, "WEG", "WEGE3.SA", "Eletrônicos", 9),
-                (3, "PETRORIO", "PRIO3.SA", "Petróleoa", 8),
-                (4, "MAGAZINE LUIZA", "MGLU3.SA", "Varejo", 7),
-                (5, "BRADESPAR", "BRAP4.SA", "Financeiro e Outros", 6),
-                (6, "VALE", "VALE3.SA", "Mineração", 5),
-                (7, "USIMINAS", "USIM5.SA", "Mineração, Siderúrgica", 4),
-                (8, "B3", "B3SA3.SA", "Financeiro", 3),
-                (9, "SUZANO PAPEL", "SUZB3.SA", "Papel; ‎Celulose", 2),
-                (10, "LOCALIZA", "RENT3.SA", "Automóveis", 1)
+                (1, "Petrobras", "PBR", "Petróleo", 1),
+                (2, "Itaú Unibanco Holding S.A", "ITUB", "Banco", 2),
+                (3, "Banco Bradesco S.A", "BBD", "Banco", 3),
+                (4, "JBS", "JBSS", "Carnes", 4),
+                (5, "VALE", "VALE", "Mineração", 5),
+                (6, "Suzano S.A", "SUZ", "Papel; ‎Celulose", 6),
+                (7, "Braskem", "BAK", "Resinas termoplásticas", 7),
+                (8, "CEMIG", "CIG", "Energia", 8),
+                (9, "Ultrapar Participações", "UGP", "Pacombustíveis", 9),
+                (10, "Companhia Brasileira de Distribuicao", "CBD", "Varejo", 10)
         ])

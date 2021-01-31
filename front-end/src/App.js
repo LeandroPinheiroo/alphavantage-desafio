@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import classNames from 'classnames';
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import {useSelector} from 'react-redux';
 
@@ -95,6 +95,7 @@ const App = () => {
 
                 </div>
             }
+            {useSelector(state => state.user.usuarioLogado) === 0 ? <Redirect to="/login"></Redirect> : null}
             {
                 useSelector(state => state.user.usuarioLogado) === 0 &&
                 <>

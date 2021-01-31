@@ -4,6 +4,7 @@ import { Toast } from 'primereact/toast';
 import {EmpresaService} from '../service/EmpresaService'
 import {InputText} from 'primereact/inputtext';
 import { Button } from 'primereact/button';
+import Chart from "react-google-charts";
 
 import "./style.css"
 
@@ -19,7 +20,7 @@ export const Empresa = () => {
     const [variacao, setVariacao] = useState("");
     const [porcentagemVariacao, setPorcentagemVariacao] = useState("");
     const [classificacao, setClassificacao] = useState("");
-
+    const [intraday, setIntraDay] = useState([]);
     
     const [empresa, setEmpresa] = useState(null);
 
@@ -37,6 +38,7 @@ export const Empresa = () => {
     const onEmpresaSelect = (simbolo) => {
         setEmpresa(simbolo);
         onBuscaCotacao(simbolo);
+        onBuscaIntraDay(simbolo);
     };
 
     const onBuscaCotacao = (simbolo) => {
@@ -58,11 +60,31 @@ export const Empresa = () => {
         });
     };
 
+    const onBuscaIntraDay = (simbolo) => {
+    
+        toast.current.show({ severity: 'info', summary: 'Buscando intraday: ' + simbolo,life: 2000 });
+        empresaService.getIntraday(simbolo).then(data => {
+            if(data.intraday){
+                let intraAux = []
+                let aux = ['Data/Hora','Valor Fechamento'];
+                intraAux.push(aux);
+                data.intraday.map((item) => {
+                    aux = [item.data,parseFloat(item.fechamento)];
+                    intraAux.push(aux);
+                });
+                setIntraDay(intraAux);
+            
+            }else{
+                toast.current.show({ severity: 'error', summary: 'Falha ao buscar intraday: '+empresa,life: 3000 });
+            }
+        });
+    };
+
     return (
         <>
             <Toast ref={toast} />
             <div className="card">
-                <h1>As 10 ações do Ibovespa que mais subiram em 2020</h1>
+                <h1>10 Maiores empresas segundo Forbes</h1>
                 <div className="p-grid p-fluid p-dir-row">
                     {
                     empresas.map((emp) => {
@@ -77,41 +99,58 @@ export const Empresa = () => {
                 
             </div>
         
-            { nome !== "" &&<div className="card">
-                <h1>Empresa Selecionada: {nome}, Classificação: {classificacao}</h1>
-                <div className="p-grid p-fluid p-dir-row">
-                    <div className="p-field p-col-12 p-md-3">
-                            <label htmlFor="firstname1">Empresa</label>
-                            <InputText id="firstname1" type="text"  value={nome} readOnly={true}/>
+            { nome !== "" &&
+                <div className="card">
+                    <h1>Empresa Selecionada: {nome}, Classificação: {classificacao}</h1>
+                    <div className="p-grid p-fluid p-dir-row">
+                        <div className="p-field p-col-12 p-md-3">
+                                <label htmlFor="firstname1">Empresa</label>
+                                <InputText id="firstname1" type="text"  value={nome} readOnly={true}/>
+                        </div>
+                        <div className="p-field p-col-12 p-md-3">
+                                <label htmlFor="firstname1">Símbolo Bolsa</label>
+                                <InputText id="firstname1" type="text"  value={classificao_setorial} readOnly={true}/>
+                        </div>
+                        <div className="p-field p-col-12 p-md-6 ">
+                                <label htmlFor="lastname1">Ramo</label>
+                                <InputText id="lastname1" type="text"  value={ramo} readOnly={true}/>
+                        </div>
                     </div>
-                    <div className="p-field p-col-12 p-md-3">
-                            <label htmlFor="firstname1">Símbolo Bolsa</label>
-                            <InputText id="firstname1" type="text"  value={classificao_setorial} readOnly={true}/>
+                    <div className="p-grid p-fluid p-dir-row">
+                        <div className="p-field p-col-12 p-md-3">
+                                <label htmlFor="firstname1">Preço</label>
+                                <InputText id="firstname1" type="text"  value={preco} readOnly={true}/>
+                        </div>
+                        <div className="p-field p-col-12 p-md-3">
+                                <label htmlFor="firstname1">Volume</label>
+                                <InputText id="firstname1" type="text" value={volume} readOnly={true}/>
+                        </div>
+                        <div className="p-field p-col-12 p-md-3">
+                                <label htmlFor="lastname1">Variação</label>
+                                <InputText id="lastname1" type="text" value={variacao} readOnly={true}/>
+                        </div>
+                        <div className="p-field p-col-12 p-md-3">
+                                <label htmlFor="lastname1">Porcentagem Variação</label>
+                                <InputText id="lastname1" type="text" value={porcentagemVariacao} readOnly={true}/>
+                        </div>
                     </div>
-                    <div className="p-field p-col-12 p-md-6 ">
-                            <label htmlFor="lastname1">Ramo</label>
-                            <InputText id="lastname1" type="text"  value={ramo} readOnly={true}/>
-                    </div>
+                    <Chart
+                        width={'100%'}
+                        height={'100vh'}
+                        chartType="AreaChart"
+                        loader={<div>Carregando</div>}
+                        data={intraday}
+                        options={{
+                        title: 'Intra Day',
+                        hAxis: { title: 'Year', titleTextStyle: { color: '#333' } },
+                        vAxis: { minValue: 0 },
+                        // For the legend to fit, we make the chart area smaller
+                        chartArea: { width: '50%', height: '70%' },
+                        // lineWidth: 25
+                        }}
+                    />
                 </div>
-                <div className="p-grid p-fluid p-dir-row">
-                    <div className="p-field p-col-12 p-md-3">
-                            <label htmlFor="firstname1">Preço</label>
-                            <InputText id="firstname1" type="text"  value={preco} readOnly={true}/>
-                    </div>
-                    <div className="p-field p-col-12 p-md-3">
-                            <label htmlFor="firstname1">Volume</label>
-                            <InputText id="firstname1" type="text" value={volume} readOnly={true}/>
-                    </div>
-                    <div className="p-field p-col-12 p-md-3">
-                            <label htmlFor="lastname1">Variação</label>
-                            <InputText id="lastname1" type="text" value={variacao} readOnly={true}/>
-                    </div>
-                    <div className="p-field p-col-12 p-md-3">
-                            <label htmlFor="lastname1">Porcentagem Variação</label>
-                            <InputText id="lastname1" type="text" value={porcentagemVariacao} readOnly={true}/>
-                    </div>
-                </div>
-            </div>}
+            }
         </>
     );
 }

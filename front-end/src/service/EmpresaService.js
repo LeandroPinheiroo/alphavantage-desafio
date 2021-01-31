@@ -12,4 +12,10 @@ export class EmpresaService {
         .then(res => res.data)
         .catch(() => "erro");
     }
+
+    getIntraday(sigla) {
+        return axios.get('http://127.0.0.1:8000/empresa/'+sigla+'/intraday')
+        .then(res => res.data)
+        .catch(() => "erro");
+    }
 }

@@ -102,3 +102,11 @@ Os endpoints da API desenvolvidas foram feitos utilizando o padrão Rest com o i
     }
 ]
 ```
+
+## FrontEnd
+
+Para iniciar o front da aplicação primeiramente é necessário a instalação de um pacote gerenciador do Node como o Yarn, feito isso basta rodar o comando na raiz da pasta front-end:
+```
+yarn install 
+```
+Feito isso será criado a pasta **node_modules** e assim o projeto poderá ser executado com o comando **yarn start** para que o mesmo seja iniciado no endereço **http://localhost:3000/**, dessa forma todo o processo de aplicação será automaticamente iniciado ou seja Front da aplicação irá consumir a API criada e retornar de forma amigável todos os dados recolhidos.

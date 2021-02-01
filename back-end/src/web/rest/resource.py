@@ -5,7 +5,6 @@ import asyncio
 import asyncpg
 import aiohttp
 import requests
-from marshmallow import Schema, fields, ValidationError, EXCLUDE
 
 from src.domain.intraday import Intraday
 from src.domain.usuario import Usuario

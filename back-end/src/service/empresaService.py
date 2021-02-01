@@ -6,7 +6,7 @@ from src.repository import empresaRepository
 from src.repository import cotacaoRepository
 from src.service.mapper.cotacaoMapper import CotacaoMapper
 from src.service.mapper.intradayMapper import IntradayMapper
-from src.util import dbUtil
+from src.util import dbUtil, alphaVantageUtil
 
 async def buscaEmpresas():
     empresas = await empresaRepository.findEmpresas()
@@ -29,7 +29,7 @@ async def buscaIntraDay(simbolo: str):
     parameters += "&interval=" + interval
     parameters += "&apikey=" + chave
     try:
-        response = requests.get('https://www.alphavantage.co/query?' + parameters)
+        response = requests.get(alphaVantageUtil.getUrl() + parameters)
         jsonResponse : dict = response.json() 
         intradayList = IntradayMapper.toIntradayList(jsonResponse["Time Series (1min)"])
         return intradayList
@@ -51,8 +51,8 @@ async def buscaCotacao(simbolo: str):
     parameters += "&symbol=" + simbolo
     parameters += "&apikey=" + chave
     try:
-        response = requests.get('https://www.alphavantage.co/query?' + parameters)
-        jsonResponse : dict = response.json() #em python, ao desserializar o json do response o objeto é do tipo dict
+        response = requests.get(alphaVantageUtil.getUrl() + parameters)
+        jsonResponse : dict = response.json() 
         cotacao = CotacaoMapper.toCotacao(jsonResponse["Global Quote"])
         cotacao.setIdEmpresa(empresa.getId())
         await cotacaoRepository.insert(cotacao)

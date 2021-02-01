@@ -12,10 +12,10 @@ async def init():
         await tabelaCotacao(conexao)
         empresasSalvas = await findQuantidadeEmpresas(conexao)
         if(empresasSalvas < 10):
-            print("Inserindo maiores empresas brasileiras")
+            print("Inserindo empresas")
             await insertEmpresas(conexao)
         await conexao.close()
-        print("Banco de dados criado!")
+        print("Database criado!")
         return True
     except Exception as exceptMsg:
         print(str(exceptMsg))
@@ -74,9 +74,9 @@ async def findQuantidadeEmpresas(conexao : Connection):
 
 async def insertEmpresas(conexao : Connection):
     async with conexao.transaction():
-        #apaga as empresas salvas na base
-        await conexao.execute('''
-            delete from empresa
+        await conexao.execute(
+            '''
+                delete from empresa
             '''
         )
         

@@ -2,7 +2,7 @@
 
 ## Requisitos Computacionais
 
-- Back-end
+**Back-end**
 
 - [python 3.7]
 - [Sanic Frameworkk]
@@ -11,7 +11,7 @@
 - [Requests]
 - [PostgreSQL]
 
-- Front-end
+**Front-end**
 
 - [ReactJs]
 - [PrimeReact (Sigma)]
